@@ -1421,4 +1421,19 @@ button {
   .pergunta-conteudo.sem-figura .enunciado {
     font-size: clamp(1.8rem, 4.5vh, 2.4rem);
   }
+
+  /* Mensagem de acerto/erro: caixa arredondada (não pílula), texto centralizado
+     em cima e botão embaixo, sem virar uma "bolha" quando o texto quebra linha */
+  .feedback {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 24px;
+  }
+
+  .feedback-texto {
+    font-size: clamp(1.4rem, 3.4vh, 1.9rem);
+    line-height: 1.15;
+    text-align: center;
+  }
 }
