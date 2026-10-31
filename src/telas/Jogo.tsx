@@ -82,7 +82,7 @@ export function Jogo() {
       if (!partida || mostrarDica || confirmarSaida) return
       const tecla = e.key.toLowerCase()
       const mapa: Record<string, number> = { '1': 0, '2': 1, '3': 2, '4': 3, a: 0, b: 1, c: 2, d: 3 }
-      if (partida.fase === 'pergunta' && tecla in mapa) {
+      if (partida.fase === 'pergunta' && tecla in mapa && mapa[tecla] < pergunta!.alternativas.length) {
         sons.selecionar()
         escolher(mapa[tecla])
       } else if (partida.fase === 'revelada' && (tecla === 'enter' || tecla === ' ' || tecla === 'arrowright' || tecla === 'pagedown')) {
@@ -183,7 +183,7 @@ export function Jogo() {
       </AnimatePresence>
 
       {/* Alternativas */}
-      <div className="alternativas" key={'alt-' + indice}>
+      <div className={`alternativas ${pergunta.alternativas.length === 3 ? 'tres' : ''}`} key={'alt-' + indice}>
         {pergunta.alternativas.map((texto, i) => {
           const estado = estadoAlternativa(i)
           return (
@@ -253,7 +253,7 @@ export function Jogo() {
           ) : (
             <motion.div key="ajudas" className="ajudas" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <BotaoAjuda emoji="⏭️" rotulo="Pular" disponivel={ajudas.pular} aoClicar={() => { sons.pular(); parar(); pular() }} />
-              <BotaoAjuda emoji="✂️" rotulo="Eliminar 2" disponivel={ajudas.eliminar} aoClicar={() => { sons.ajuda(); eliminarDuas() }} />
+              <BotaoAjuda emoji="✂️" rotulo={`Eliminar ${pergunta.alternativas.length - 2}`} disponivel={ajudas.eliminar} aoClicar={() => { sons.ajuda(); eliminarDuas() }} />
               <BotaoAjuda
                 emoji="🧑‍🏫"
                 rotulo="Ajuda do Professor"

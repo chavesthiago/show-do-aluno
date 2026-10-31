@@ -39,11 +39,11 @@ function perguntaValida(p: unknown): p is Pergunta {
   return (
     typeof q?.enunciado === 'string' &&
     Array.isArray(q.alternativas) &&
-    q.alternativas.length === 4 &&
+    (q.alternativas.length === 3 || q.alternativas.length === 4) &&
     q.alternativas.every((a) => typeof a === 'string') &&
     Number.isInteger(q.correta) &&
     q.correta >= 0 &&
-    q.correta <= 3
+    q.correta < q.alternativas.length
   )
 }
 

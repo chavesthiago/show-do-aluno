@@ -164,8 +164,13 @@ export const useApp = create<Estado>((set, get) => ({
   eliminarDuas: () => {
     const p = get().partida
     if (!p || !p.ajudas.eliminar || p.fase !== 'pergunta') return
-    const correta = p.perguntas[p.indice].correta
-    const erradas = [0, 1, 2, 3].filter((i) => i !== correta).sort(() => Math.random() - 0.5).slice(0, 2)
+    const { correta, alternativas } = p.perguntas[p.indice]
+    // Sempre sobra uma errada: com 4 alternativas elimina 2, com 3 elimina 1
+    const erradas = alternativas
+      .map((_, i) => i)
+      .filter((i) => i !== correta)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, alternativas.length - 2)
     set({ partida: { ...p, eliminadas: erradas, ajudas: { ...p.ajudas, eliminar: false } } })
   },
 

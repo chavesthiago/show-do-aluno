@@ -415,7 +415,8 @@ const CORES_ALT = ['alt-vermelha', 'alt-azul', 'alt-amarela', 'alt-verde']
 const LETRAS = ['A', 'B', 'C', 'D']
 
 function EditorPergunta({ inicial, aoSalvar, aoCancelar }: { inicial: Pergunta; aoSalvar: (p: Pergunta) => void; aoCancelar: () => void }) {
-  const [p, setP] = useState<Pergunta>(inicial)
+  // O editor sempre mostra 4 campos; a pergunta salva com 3 fica com o último vazio
+  const [p, setP] = useState<Pergunta>(() => ({ ...inicial, alternativas: [...inicial.alternativas, '', '', '', ''].slice(0, 4) as Pergunta['alternativas'] }))
   const [erro, setErro] = useState('')
   const entradaFoto = useRef<HTMLInputElement>(null)
 
@@ -440,10 +441,13 @@ function EditorPergunta({ inicial, aoSalvar, aoCancelar }: { inicial: Pergunta; 
   }
 
   function salvar() {
-    const alternativas = p.alternativas.map((a) => a.trim()) as Pergunta['alternativas']
+    const preenchidas = p.alternativas.map((a) => a.trim())
+    // A última (D) pode ficar em branco: aí a pergunta tem só 3 alternativas
+    const alternativas = (preenchidas[3] ? preenchidas : preenchidas.slice(0, 3)) as Pergunta['alternativas']
     if (!p.enunciado.trim()) return setErro('Escreva a pergunta.')
-    if (alternativas.some((a) => !a)) return setErro('Preencha as 4 alternativas.')
-    if (new Set(alternativas.map((a) => a.toLowerCase())).size < 4) return setErro('As alternativas precisam ser diferentes.')
+    if (alternativas.some((a) => !a)) return setErro('Preencha as alternativas A, B e C (a D é opcional).')
+    if (p.correta >= alternativas.length) return setErro('A resposta certa não pode ser uma alternativa em branco.')
+    if (new Set(alternativas.map((a) => a.toLowerCase())).size < alternativas.length) return setErro('As alternativas precisam ser diferentes.')
     aoSalvar({
       ...p,
       enunciado: p.enunciado.trim(),
@@ -502,7 +506,7 @@ function EditorPergunta({ inicial, aoSalvar, aoCancelar }: { inicial: Pergunta; 
         </div>
 
         <div className="campo">
-          <span>Alternativas: toque no círculo da resposta certa</span>
+          <span>Alternativas: toque no círculo da resposta certa (deixe a D em branco para ter só 3)</span>
           <div className="editor-alternativas">
             {p.alternativas.map((a, i) => (
               <div key={i} className={`editor-alt ${CORES_ALT[i]} ${p.correta === i ? 'marcada' : ''}`}>
@@ -514,7 +518,7 @@ function EditorPergunta({ inicial, aoSalvar, aoCancelar }: { inicial: Pergunta; 
                 >
                   {p.correta === i ? '✔' : LETRAS[i]}
                 </button>
-                <input value={a} maxLength={60} placeholder={`Alternativa ${LETRAS[i]}`} onChange={(e) => alterarAlternativa(i, e.target.value)} />
+                <input value={a} maxLength={60} placeholder={i === 3 ? 'Alternativa D (opcional)' : `Alternativa ${LETRAS[i]}`} onChange={(e) => alterarAlternativa(i, e.target.value)} />
               </div>
             ))}
           </div>
