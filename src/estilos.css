@@ -747,7 +747,27 @@ button {
   max-width: 22ch;
 }
 
-.pergunta-figura + .enunciado {
+/* Pergunta + destaque: lado a lado; com figura, o destaque vai para a linha de baixo */
+.pergunta-texto {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px clamp(12px, 2.5vw, 40px);
+  flex: 1;
+  min-width: 0;
+}
+
+.pergunta-texto .enunciado {
+  flex: 0 1 auto;
+}
+
+.pergunta-figura + .pergunta-texto {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.pergunta-figura + .pergunta-texto .enunciado {
   text-align: left;
 }
 
@@ -1301,7 +1321,11 @@ button {
     max-width: 100%;
   }
 
-  .pergunta-figura + .enunciado {
+  .pergunta-figura + .pergunta-texto {
+    align-items: center;
+  }
+
+  .pergunta-figura + .pergunta-texto .enunciado {
     text-align: center;
   }
 
@@ -1375,9 +1399,11 @@ button {
   width: 90px;
 }
 
-/* Pergunta com só 3 alternativas: a última ocupa a linha inteira */
-.alternativas.tres .alternativa:last-child {
-  grid-column: 1 / -1;
+/* Telas maiores: 3 alternativas ficam numa linha só (4 ficam em 2 × 2) */
+@media (min-width: 701px), (orientation: landscape) {
+  .alternativas.tres {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .explicacao-destaque {
