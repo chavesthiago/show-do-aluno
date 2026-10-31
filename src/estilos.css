@@ -694,7 +694,7 @@ button {
 }
 
 .figura {
-  font-size: clamp(4.5rem, 14vh, 10rem);
+  font-size: clamp(5rem, 18vh, 13rem);
   line-height: 1.1;
   text-align: center;
   user-select: none;
@@ -712,7 +712,7 @@ button {
 }
 
 .figura-foto {
-  max-height: clamp(120px, 26vh, 300px);
+  max-height: clamp(140px, 36vh, 440px);
   max-width: 100%;
   border-radius: 20px;
   object-fit: contain;
@@ -729,7 +729,7 @@ button {
 }
 
 .destaque {
-  font-size: clamp(2.4rem, 7vh, 5rem);
+  font-size: clamp(2.8rem, 9vh, 6.5rem);
   font-weight: 800;
   letter-spacing: 0.06em;
   color: var(--roxo-claro);
@@ -739,31 +739,24 @@ button {
 
 .enunciado {
   margin: 0;
-  font-size: clamp(1.6rem, 4.6vh, 3.4rem);
+  font-size: clamp(1.9rem, 6.2vh, 4.4rem);
   line-height: 1.15;
   font-weight: 800;
   text-align: center;
-  flex: 1;
-  max-width: 22ch;
+  max-width: 26ch;
 }
 
-/* Pergunta + destaque: lado a lado; com figura, o destaque vai para a linha de baixo */
+/* Pergunta na 1ª linha e destaque embaixo. Figura + texto ficam
+   centralizados juntos, sem sobrar espaço vazio de um lado só. */
 .pergunta-texto {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 4px clamp(12px, 2.5vw, 40px);
-  flex: 1;
+  gap: 4px;
   min-width: 0;
 }
 
-.pergunta-texto .enunciado {
-  flex: 0 1 auto;
-}
-
 .pergunta-figura + .pergunta-texto {
-  flex-direction: column;
   align-items: flex-start;
 }
 
@@ -1330,7 +1323,7 @@ button {
   }
 
   .enunciado {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 
   .botao-ouvir {
@@ -1377,7 +1370,7 @@ button {
 
 /* Pergunta só com texto: letras maiores para ler de longe */
 .pergunta-conteudo.sem-figura .enunciado {
-  font-size: clamp(1.8rem, 7.5vh, 5rem);
+  font-size: clamp(2.2rem, 8.5vh, 6rem);
   max-width: 24ch;
 }
 
@@ -1409,4 +1402,23 @@ button {
 .explicacao-destaque {
   font-size: 0.95rem;
   opacity: 0.85;
+}
+
+/* Celular em pé: tamanhos menores (fica no fim para valer sobre as regras acima) */
+@media (max-width: 700px) and (orientation: portrait) {
+  .figura {
+    font-size: clamp(3.5rem, 11vh, 6rem);
+  }
+
+  .figura-foto {
+    max-height: 26vh;
+  }
+
+  .destaque {
+    font-size: clamp(2.2rem, 6vh, 3.2rem);
+  }
+
+  .pergunta-conteudo.sem-figura .enunciado {
+    font-size: clamp(1.8rem, 4.5vh, 2.4rem);
+  }
 }
