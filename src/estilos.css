@@ -1436,4 +1436,95 @@ button {
     line-height: 1.15;
     text-align: center;
   }
+  .alternativa {
+    min-height: clamp(48px, 7vh, 64px);
+  }
+
+  .figura-foto {
+    max-height: 34vh;
+  }
+
+  /* espaço para o selo "Pergunta X de Y" não ficar em cima da figura */
+  .pergunta {
+    padding-top: 24px;
+  }
+}
+
+/* Celular em pé e baixo (ex.: 375 × 667): tudo mais compacto para sobrar espaço para a figura */
+@media (max-width: 700px) and (orientation: portrait) and (max-height: 760px) {
+  .jogo {
+    gap: 6px;
+  }
+
+  .alternativas {
+    gap: 6px;
+  }
+
+  .alternativa {
+    min-height: 44px;
+    padding: 4px 12px 4px 6px;
+    font-size: 1.2rem;
+    border-radius: 16px;
+  }
+
+  .alt-marca {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .rodape-jogo {
+    min-height: 0;
+  }
+
+  .botao-ajuda {
+    min-height: 56px;
+  }
+
+  .feedback {
+    gap: 6px;
+    padding: 8px 12px;
+  }
+
+  .feedback-texto {
+    font-size: 1.3rem;
+  }
+
+  .feedback .botao-grande {
+    min-height: 44px;
+    font-size: 1.05rem;
+  }
+}
+
+/* A tela do jogo tem a altura exata do visor: a figura encolhe para que
+   topo, pergunta, alternativas e rodapé caibam sem cortar. Só rola se,
+   mesmo assim, não couber (ex.: celular deitado bem baixo). */
+.tela.jogo {
+  height: 100dvh;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.pergunta-conteudo {
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.pergunta-figura {
+  flex-shrink: 1;
+  min-height: 0;
+  justify-content: center;
+}
+
+/* O texto nunca encolhe: quem cede espaço é a figura */
+.pergunta-texto {
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+.pergunta-figura .figura-foto {
+  flex: 0 1 auto;
+  min-height: 0;
+  box-shadow: none;
 }
