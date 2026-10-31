@@ -20,8 +20,8 @@ export interface Pergunta {
   imagem?: string
   /** Texto grande que aparece junto da figura (ex.: "__TO", "7 + 5") */
   destaque?: string
-  /** Sempre 4 alternativas */
-  alternativas: [string, string, string, string]
+  /** 4 alternativas (ou 3, quando o professor deixa a última em branco) */
+  alternativas: [string, string, string] | [string, string, string, string]
   /** Índice da alternativa correta (0 a 3) */
   correta: number
   /** Dica usada na "Ajuda do Professor" */

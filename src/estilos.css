@@ -1374,3 +1374,8 @@ button {
 .campo .emoji-linha .entrada-emoji {
   width: 90px;
 }
+
+/* Pergunta com só 3 alternativas: a última ocupa a linha inteira */
+.alternativas.tres .alternativa:last-child {
+  grid-column: 1 / -1;
+}

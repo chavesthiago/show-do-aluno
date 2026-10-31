@@ -6,7 +6,7 @@ Jogo de perguntas e respostas no estilo *game show* para alunos de **7 a 12 anos
 
 ## ✨ O que tem nesta versão (MVP)
 
-- **Show de perguntas** com 4 alternativas coloridas (cada uma com cor, letra e forma, pensando em quem tem daltonismo)
+- **Show de perguntas** com 4 alternativas coloridas (ou 3, se o professor deixar a última em branco) (cada uma com cor, letra e forma, pensando em quem tem daltonismo)
 - **Português:** vogais, 13 famílias silábicas, rimas, contrários, singular e plural, ortografia, pontuação, sinônimos, classes de palavras, sílabas e acentuação
 - **Matemática:** contagem, antes e depois, par ou ímpar, adição, subtração, tabuada, divisão, dobro e metade, sistema monetário, probleminhas, medidas e tempo, geometria, frações, decimais, porcentagem, expressões, potências, números inteiros e equações. A maioria das contas é **gerada na hora**, então as perguntas mudam a cada partida.
 - **Painel de conteúdos** com filtro por disciplina e ano escolar (com referência à BNCC)

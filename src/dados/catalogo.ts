@@ -28,7 +28,7 @@ export function totalDePerguntas(c: Conteudo): number | 'ilimitado' {
 export function prepararPerguntas(c: Conteudo, quantidade: number): Pergunta[] {
   const base = c.gerar ? c.gerar(quantidade) : embaralhar(c.perguntas ?? []).slice(0, quantidade)
   return base.map((p) => {
-    const ordem = embaralhar([0, 1, 2, 3])
+    const ordem = embaralhar(p.alternativas.map((_, i) => i))
     return {
       ...p,
       alternativas: ordem.map((i) => p.alternativas[i]) as Pergunta['alternativas'],
