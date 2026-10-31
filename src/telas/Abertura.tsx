@@ -24,7 +24,7 @@ export function Abertura() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
       >
-        Português e Matemática do jeito mais divertido! 🎉
+        Aprendendo de um jeito mais divertido! 🎉
       </motion.p>
       <motion.button
         className="botao botao-gigante botao-amarelo pulsar"
