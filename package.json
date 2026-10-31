@@ -1,0 +1,32 @@
+{
+  "name": "show-do-aluno",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Jogo de perguntas e respostas para alunos de 7 a 12 anos, feito para o professor projetar em sala de aula.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "verificar": "tsx scripts/verificar-perguntas.ts"
+  },
+  "dependencies": {
+    "@fontsource/baloo-2": "^5.3.0",
+    "canvas-confetti": "^1.9.4",
+    "framer-motion": "^14.9.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^5.0.16"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^26.6.6",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^6.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vite-plugin-pwa": "^2.0.0"
+  }
+}
