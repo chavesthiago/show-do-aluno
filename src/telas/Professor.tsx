@@ -360,7 +360,9 @@ function EditorConteudo({ inicial, aoSalvar, aoCancelar }: { inicial: ConteudoSa
               {p.imagem && <Figura imagem={p.imagem} tamanho="pequena" />}
               <div className="item-info">
                 <strong>{p.enunciado}</strong>
-                <span>✔ {p.alternativas[p.correta]}</span>
+                <span>
+                  {p.destaque && `${p.destaque} · `}✔ {p.alternativas[p.correta]}
+                </span>
               </div>
               <div className="item-acoes">
                 <button className="botao botao-icone" onClick={() => mover(i, -1)} disabled={i === 0} aria-label="Subir">
@@ -454,6 +456,8 @@ function EditorPergunta({ inicial, aoSalvar, aoCancelar }: { inicial: Pergunta; 
       alternativas,
       dica: p.dica?.trim() || undefined,
       imagem: p.imagem?.trim() || undefined,
+      // "___" ou "____" viram "__", que o jogo troca pela resposta certa
+      destaque: p.destaque?.trim().replace(/_{2,}/g, '__') || undefined,
     })
   }
 
@@ -504,6 +508,19 @@ function EditorPergunta({ inicial, aoSalvar, aoCancelar }: { inicial: Pergunta; 
             <input ref={entradaFoto} type="file" accept="image/*" hidden onChange={(e) => void escolherFoto(e.target.files?.[0])} />
           </div>
         </div>
+
+        <label className="campo">
+          <span>Texto em destaque (opcional): aparece grande junto da figura. Use __ para a parte que falta</span>
+          <input
+            value={p.destaque ?? ''}
+            maxLength={20}
+            placeholder="Ex.: __LEIA, CA__LO, 3 + 4"
+            onChange={(e) => alterar({ destaque: e.target.value })}
+          />
+          {p.destaque?.includes('__') && (
+            <small className="explicacao-destaque">Na hora da resposta, o __ é trocado pela alternativa certa.</small>
+          )}
+        </label>
 
         <div className="campo">
           <span>Alternativas: toque no círculo da resposta certa (deixe a D em branco para ter só 3)</span>
