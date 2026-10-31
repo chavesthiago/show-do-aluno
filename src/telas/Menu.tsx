@@ -86,7 +86,6 @@ export function Menu() {
 
       <footer className="rodape">
         Professora Luiza | Escola Municipal Sebastião Borges Barreto
-        </a>
       </footer>
     </main>
   )
