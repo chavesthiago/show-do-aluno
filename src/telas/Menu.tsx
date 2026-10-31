@@ -85,9 +85,7 @@ export function Menu() {
       </div>
 
       <footer className="rodape">
-        Projeto de portfólio ·{' '}
-        <a href="https://github.com/chavesthiago/show-do-aluno" target="_blank" rel="noreferrer">
-          código no GitHub
+        Professora Luiza | Escola Municipal Sebastião Borges Barreto
         </a>
       </footer>
     </main>
