@@ -164,17 +164,20 @@ export function Jogo() {
             Pergunta {indice + 1} de {perguntas.length}
           </div>
           <div className={`pergunta-conteudo ${pergunta.imagem || pergunta.destaque ? '' : 'sem-figura'}`}>
-            {(pergunta.imagem || pergunta.destaque) && (
+            {pergunta.imagem && (
               <motion.div
                 className="pergunta-figura"
                 animate={acertou && !config.poucaAnimacao ? { rotate: [0, -10, 10, -6, 6, 0], scale: [1, 1.15, 1] } : {}}
                 transition={{ duration: 0.8 }}
               >
                 <Figura imagem={pergunta.imagem} />
-                {pergunta.destaque && <div className="destaque">{fase === 'revelada' && pergunta.destaque.includes('__') ? pergunta.destaque.replace('__', pergunta.alternativas[pergunta.correta]) : pergunta.destaque}</div>}
               </motion.div>
             )}
-            <h2 className="enunciado">{pergunta.enunciado}</h2>
+            {/* Ordem de leitura: primeiro a pergunta, depois o destaque (ao lado, ou embaixo quando há figura) */}
+            <div className="pergunta-texto">
+              <h2 className="enunciado">{pergunta.enunciado}</h2>
+              {pergunta.destaque && <div className="destaque">{fase === 'revelada' && pergunta.destaque.includes('__') ? pergunta.destaque.replace('__', pergunta.alternativas[pergunta.correta]) : pergunta.destaque}</div>}
+            </div>
           </div>
           <button className="botao botao-ouvir" onClick={() => narrarPergunta(true)} aria-label="Ouvir a pergunta">
             🔊

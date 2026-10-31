@@ -510,7 +510,7 @@ function EditorPergunta({ inicial, aoSalvar, aoCancelar }: { inicial: Pergunta; 
         </div>
 
         <label className="campo">
-          <span>Texto em destaque (opcional): aparece grande junto da figura. Use __ para a parte que falta</span>
+          <span>Texto em destaque (opcional): aparece grande depois da pergunta. Use __ para a parte que falta</span>
           <input
             value={p.destaque ?? ''}
             maxLength={20}
